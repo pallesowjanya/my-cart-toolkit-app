@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setItems } from './features/cart/cartSlice';
+import Cart from './features/cart/Cart';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Replace this with your actual data URL or array of items
+      const data = [
+        {
+          id: 1,
+          title: 'Wolf So Grim and Mangy',
+          price: 249.0,
+          quantity: 1,
+          image: 'https://via.placeholder.com/50', // Replace with actual image URL
+        },
+        // Add more items here...
+      ];
+      dispatch(setItems(data));
+    };
+
+    fetchData();
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Cart />
     </div>
   );
 }
